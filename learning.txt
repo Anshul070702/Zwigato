@@ -1,0 +1,198 @@
+#. Render puts/loads the react object in root
+#. What is crossorigin? Why do we write it?
+=> The crossorigin attribute is used when loading external resources, such as scripts or stylesheets, to specify 
+how the resource should be handled in terms of CORS (Cross-Origin Resource Sharing). 
+=> We need to write crossorigin in cases where We're loading external resources, like scripts or stylesheets, 
+from a different origin and We want the browser to enforce CORS policies for security purposes. 
+#.Creating a ReactElement
+React.createElement(tag_name,object,children)
+eg:
+const heading = React.createElement(
+  "h1",
+  { id: "heading" },
+  "Hello world from React!"
+);
+#. Creating nesting in React
+const parent = React.createElement
+(
+    "div",
+    { id: "parent" },
+    React.createElement
+    (
+        "div",
+        { id: "child" },
+        React.createElement("h1", { id: "heading" }, "I'm an h1 tag"
+    )
+)
+#. If we want to have structure like this:
+<div id="parent">
+    <div id="child1">
+        <h1>I'm h1 tag</h1>
+        <h2>I'm h2 tag</h2>
+    </div>
+    <div id="child2">
+        <h1>I'm h1 tag</h1>
+        <h2>I'm h2 tag</h2>
+    </div>
+</div>
+
+*Code will look like this:
+const parent = React.createElement("div", { id: "parent" }, [
+  React.createElement(
+    "div",
+    { id: "child1" },
+    React.createElement("h1", { id: "heading1" }, "I'm an h1 tag")
+  ),
+  React.createElement(
+    "div",
+    { id: "child2" },
+    React.createElement("h1", { id: "heading2" }, "I'm an h1 tag")
+  ),
+]);
+
+#.npm => Everything but Node Package Manager, manages package but not stands for it.
+#.package.json => It is the configuration for npm.
+#.Bundler => packages the app so that it can be pushed to production.
+#.create-react-app uses Webpack as Bundler.
+#.Two types of dependencies we can install:
+1. Normal dependency => used in production 2. Dev dependency => required in development phase.
+# caret(^){Compatible with version} && tilde(~){Approximately equivalent to version}
+=> ~version -> updates to all future versions, without incrementing the minor version.
+=> ^version -> updates to all future minor/versions, without incrementing the major version.
+#. Package-lock.json => keeps track of exact versions of all dependencies.
+#. Node modules contains all the codes that we fetch from npm.
+#. If we want some files to not go in production then we can store them in .gitignore file.
+#. if you have package.json and package-lock.json then node modules can be recreated, So its not required to 
+push node_modules into github.
+#. npx => executing a package
+#. React.createElement => Object => HTMLElement(on render)
+#. JSX is not HTML inside JS, it is HTML-like or XML-like syntax
+#. What bundler does
+Create a server
+* HRM- HOt Module Reloading
+* File Watcher algorithum -C++
+* Building
+* MInify
+* Cleaning our Code
+* Dev and Production Build
+* Super fast build Algorithum
+* Image Optimization
+* Caching while development (image should in project )
+* Compression
+* Compatible with older version of browser 
+*  HTTPS on dev
+*  parcel manages port number
+*  Consistent hashing Algorithum
+*  Zero configuration
+#. JSX is transpiled before it reaches JS => Babel is transpiling this code.
+#. Babel is JS Compiler that transpiles JSX code into code that JS Engine understands.
+#. Behind the scene, JSX is transpiled to React.createElement.
+#. Attributes should be in camel case in JSX.
+#. 2 types of Components in React:
+1. Class based Components.(Old style) => uses JS classes.
+2. Functional Components. (Modern style) => uses JS functions.
+#. ALways name the components with capital letters.
+#. JS function that returns a React element is called the functional component.
+#. root.render(<FunctionalComponent/>) => Render a component.
+#. Component Composition simply means composing multiple components within each other.
+#. JSX prevents cross side scripting from malicious APIs.
+#. Inline CSS is given as JS object in JSX.
+#. Props => It is JS object which is passed as an argument passed to a component to make it dynamic.
+#. Config-Driven UI: Controlling the UI using data (config).
+=> using different UI based on different configuration. (System Design)
+=> This is done in backend.
+#. Whenver looping onto anything using .map(), always give key(which should be unique) because this way React will only render the new components, not all(every element will be uniquely identified). => Huge Optimization.
+#. React doesnot recommend using indices as the key as:
+whenever React enocoumters the an array of elements based on their indices, it assumes that the order of the elements is fixed. As as result any changes to the list can result in unncecssary renders and can disrupt the application state.
+#. Two types of export: Default export and Named Export.
+* While importing a named export, we need to use {}.
+#. React Hooks = normal JS utility Function.
+#. 2 important hooks:
+* Use state() => used to generate superpowerful state variable.
+* eg=> const [counter,setCounter] = useState(default_value)
+  here, setCounter is the trigger that will make the updation in the counter.
+  useState() => return an array.
+* Use Effect() 
+#. Why React is Efficient and Fast?
+* Whenever a state variable is updated, React re-renders the component.
+* React uses Reconciliation Algorithm (also known as React Fiber) to diff one tree with another to determine which parts need to be changed.
+* Virtual DOM => representation of actual DOM structure.
+* Diffing Algorithm finds difference between the previous Virtual DOM and the new Virtual DOM and then it computes which operations are needed to update the rendered app. 
+* This way the changes are done only to the nodes that are updated in the new Virtual. This way, DOM is updated efficiently. That's why React is fast and effcient.
+#. Monolith Architecture
+* Traditionally, apps were developed using this architecture.
+* In a big project, everything was included in the same project.
+* Sevices like API,Database,UI,Authentication,etc everything was in a same project.
+#. Micro service architecture
+* We have different services for different jobs.
+* Follows Single-responsibility principle and different services run on different ports.
+* These services interact with each other. 
+#. How UI Apps Fetch Data from the Backend?
+  Two Approaches:
+  1. As soon as the page loads, we can make the API call, wait for data to come and then we will render the data.
+  2. As soon as the page loads, we will render the skeleton UI, and then make API call and then we will re-render the data.
+* React uses 2nd approach as it gives better UX.
+* React render cycles are very fast.
+#. useEffect() is used in 2nd appraoch.
+  syntax: UseEffect((callback_function) =>{},[dependency_array])
+#. Shimmer UI => showing the fake pages until the actual UI is rendered.
+#. #. Whenever we upadate the local state variable, React triggers a Reconciliation cycle i.e. re-renders the component.
+#. Optional chainging:
+The optional chaining (?.) operator accesses an object's property or calls a function. 
+If the object accessed or function called using this operator is undefined or null, 
+the expression short circuits and evaluates to undefined instead of throwing an error.
+#. useEffect() important points (interview):
+* If no dependency array =>  useEffect is called on every render.
+* If dependency array is empty [] => useEffect is called on the initial render(just once).
+* If dependency array is not empty => useEffect is called only when the dependency changes. 
+#. useState() important points (interview):
+* never create a useState inside IF-Else(condition) or function, they are meant to be created inside the functional components at the top.
+#. RouterProvider provides the rouinting configuration to our app.
+#. If there is no page with certain path, React Router DOM creates an error page itself.
+#. react-router-dom gives us the useRouterError() hook.
+* useRouterError() helps us to extract information related to the error.
+#. Children Routes are loaded inside the Outlet.
+#. In React, whenever you want to route to someother page, never use an anchor tag.
+* Why? 
+=> It refreshes the whole page.
+=> React doesnot reloads the whole page.
+=> We can navigate to new page without reloading the page.
+=> Link component of react-router-dom gives us this power.
+=> This link component works exactly as the anchor tag. 
+=> Behind the scene, Link uses anchor tag.
+#. Instead of loading the whole page, we just change the components in React, that's why it is a singe page application.
+#. We can have two types of Routing in web apps:
+* Client-side Routing => Single Page Application routing.
+* Server-side Routing => Page is loaded from the server after the network call.
+#. The useParams hook is a React router hook that is used to create and access multiple parameters of a website. 
+In essence, the useParams hook gives access to multiple contents in the same URL path. The useParams hook enables
+ each parameter to have a unique identification.
+#. naming the custom hooks with "use" is good practice. 
+#. Chuncking/ Code Splitting/ Dynamic Bundling/ Lazy Loading/ On-demand Loading/ Dynamic Import => breakdown of app into logical smaller chunks
+* Need?
+Bundler takes all the files and bundles into one JS file. All the code is present in one JS file.When 
+our app is very big, the size of bundled file is also very big. This causes our application toload slower.
+To eradicate such problem,we divide our app into different bundles which makes the loading of our app faster,
+thus creating a different bundle file for the on-demand components.
+#. Tailwind CSS uses postcss behind the scenes.
+#. postcss is the tool for transforming css into javascript 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
